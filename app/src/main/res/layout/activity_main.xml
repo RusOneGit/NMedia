@@ -94,7 +94,7 @@
 
     <TextView
         android:id="@+id/count_like"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/avatar_size"
         android:layout_marginTop="@dimen/margin"
         android:gravity="center"
@@ -117,22 +117,23 @@
 
     <TextView
         android:id="@+id/count_share"
-        android:layout_width="16dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/avatar_size"
         android:layout_marginTop="@dimen/margin"
         android:gravity="center"
         android:text="@string/post_count_share"
+        app:layout_constraintEnd_toEndOf=""
         app:layout_constraintStart_toEndOf="@id/share"
         app:layout_constraintTop_toBottomOf="@id/barrier4" />
 
     <ImageButton
         android:id="@+id/view"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
         android:layout_marginTop="@dimen/margin"
         android:background="@android:color/transparent"
         android:contentDescription="@string/post_view"
-        app:layout_constraintEnd_toEndOf="@id/menu"
+        app:layout_constraintEnd_toEndOf="@id/count_view"
         app:layout_constraintEnd_toStartOf="@id/barrier4"
         app:layout_constraintTop_toBottomOf="@id/barrier4"
         app:srcCompat="@drawable/ic_baseline_remove_red_eye_24"
@@ -140,7 +141,7 @@
 
     <TextView
         android:id="@+id/count_view"
-        android:layout_width="@dimen/margin"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/avatar_size"
         android:layout_marginTop="@dimen/margin"
         android:text="@string/post_count_view"
