@@ -88,7 +88,7 @@
         android:layout_marginTop="@dimen/margin"
         android:background="@android:color/transparent"
         android:contentDescription="@string/post_like"
-        app:layout_constraintStart_toStartOf="@id/parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier4"
         app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
