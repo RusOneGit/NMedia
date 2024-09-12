@@ -8,10 +8,10 @@ data class Post (
     val author: String,
     val content: String,
     val published: String,
-    var likes: Int = 0,
-    var shares:Int = 0,
-    var sharedByMe: Boolean = false,
-    var likedByMe: Boolean = false
+    val likes: Int = 0,
+    val shares:Int = 0,
+    val sharedByMe: Boolean = false,
+    val likedByMe: Boolean = false
 )
 fun formatCount(count: Int): String {
     val df = DecimalFormat("#.#").apply {
