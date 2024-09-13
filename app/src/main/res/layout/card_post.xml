@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin">
+
+<ImageView
+    android:id="@+id/avatar"
+    android:layout_width="@dimen/avatar_size"
+    android:layout_height="@dimen/avatar_size"
+    android:layout_marginBottom="@dimen/margin"
+    android:contentDescription="@string/description_post_author_avatar"
+    app:layout_constraintBottom_toBottomOf="@id/barrierHeader"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/netology" />
+
+<TextView
+android:id="@+id/author"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_marginStart="@dimen/margin"
+android:layout_marginEnd="@dimen/margin"
+android:ellipsize="end"
+android:singleLine="true"
+android:text="@string/author"
+app:layout_constraintBottom_toTopOf="@+id/published"
+app:layout_constraintEnd_toStartOf="@id/menu"
+app:layout_constraintStart_toEndOf="@id/avatar"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintVertical_chainStyle="packed" />
+
+<TextView
+android:id="@+id/published"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_marginStart="@dimen/margin"
+android:layout_marginEnd="@dimen/margin"
+android:layout_marginBottom="@dimen/margin"
+android:text="@string/published"
+app:layout_constraintBottom_toBottomOf="@id/barrierHeader"
+app:layout_constraintEnd_toStartOf="@id/menu"
+app:layout_constraintStart_toEndOf="@id/avatar"
+app:layout_constraintTop_toBottomOf="@id/author" />
+
+<ImageButton
+android:id="@+id/menu"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:background="@android:color/transparent"
+android:contentDescription="@string/description_post_menu"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintTop_toTopOf="parent"
+app:srcCompat="@drawable/baseline_more_vert_24" />
+
+<androidx.constraintlayout.widget.Barrier
+android:id="@+id/barrierHeader"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+app:barrierDirection="bottom"
+app:constraint_referenced_ids="avatar,published,menu" />
+
+<TextView
+android:id="@+id/content"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_marginTop="@dimen/margin"
+android:autoLink="web"
+android:text="@string/content"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@id/barrierHeader" />
+
+<androidx.constraintlayout.widget.Barrier
+android:id="@+id/barrier4"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+app:barrierDirection="bottom"
+app:constraint_referenced_ids="content" />
+
+<ImageButton
+android:id="@+id/like"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginTop="@dimen/margin"
+android:background="@android:color/transparent"
+android:contentDescription="@string/post_like"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@id/barrier4"
+app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
+
+
+<TextView
+android:id="@+id/count_like"
+android:layout_width="wrap_content"
+android:layout_height="@dimen/avatar_size"
+android:layout_marginStart="8dp"
+android:layout_marginTop="@dimen/margin"
+android:layout_marginEnd="@dimen/margin"
+android:text="@string/post_count_like"
+app:layout_constraintStart_toEndOf="@id/like"
+app:layout_constraintTop_toBottomOf="@id/barrier4" />
+
+
+<ImageButton
+android:id="@+id/share"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginTop="@dimen/margin"
+android:background="@android:color/transparent"
+android:layout_marginStart="@dimen/margin"
+android:contentDescription="@string/post_share"
+app:layout_constraintStart_toEndOf="@id/count_like"
+app:layout_constraintTop_toBottomOf="@id/barrier4"
+app:srcCompat="@drawable/ic_baseline_share_24" />
+
+
+<TextView
+android:id="@+id/count_share"
+android:layout_width="wrap_content"
+android:layout_height="@dimen/avatar_size"
+android:layout_marginStart="@dimen/distance"
+android:layout_marginTop="@dimen/margin"
+android:text="@string/post_count_share"
+app:layout_constraintStart_toEndOf="@id/share"
+app:layout_constraintTop_toBottomOf="@id/barrier4" />
+
+<ImageButton
+android:id="@+id/view"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginTop="@dimen/margin"
+android:layout_marginEnd="@dimen/distance"
+android:background="@android:color/transparent"
+android:contentDescription="@string/post_view"
+app:layout_constraintEnd_toStartOf="@id/count_view"
+app:layout_constraintTop_toBottomOf="@id/barrier4"
+app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
+
+<TextView
+android:id="@+id/count_view"
+android:layout_width="wrap_content"
+android:layout_height="@dimen/avatar_size"
+android:layout_marginStart="@dimen/distance"
+android:layout_marginTop="@dimen/margin"
+android:text="@string/post_count_view"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintTop_toBottomOf="@id/barrier4" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
