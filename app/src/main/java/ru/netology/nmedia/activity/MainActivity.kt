@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel: PostViewModel by viewModels()
         val adapter = PostAdapter ({ viewModel.likeByID(it.id) }, {viewModel.shareByID(it.id)})
-        binding.list?.adapter = adapter
+        binding.list.adapter = adapter
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }

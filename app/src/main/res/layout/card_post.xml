@@ -52,7 +52,7 @@ android:background="@android:color/transparent"
 android:contentDescription="@string/description_post_menu"
 app:layout_constraintEnd_toEndOf="parent"
 app:layout_constraintTop_toTopOf="parent"
-app:srcCompat="@drawable/baseline_more_vert_24" />
+app:srcCompat="@drawable/ic_menu_vert" />
 
 <androidx.constraintlayout.widget.Barrier
 android:id="@+id/barrierHeader"
@@ -113,7 +113,7 @@ android:layout_marginStart="@dimen/margin"
 android:contentDescription="@string/post_share"
 app:layout_constraintStart_toEndOf="@id/count_like"
 app:layout_constraintTop_toBottomOf="@id/barrier4"
-app:srcCompat="@drawable/ic_baseline_share_24" />
+app:srcCompat="@drawable/ic_baseline_share_off" />
 
 
 <TextView
@@ -136,7 +136,7 @@ android:background="@android:color/transparent"
 android:contentDescription="@string/post_view"
 app:layout_constraintEnd_toStartOf="@id/count_view"
 app:layout_constraintTop_toBottomOf="@id/barrier4"
-app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
+app:srcCompat="@drawable/ic_view" />
 
 <TextView
 android:id="@+id/count_view"

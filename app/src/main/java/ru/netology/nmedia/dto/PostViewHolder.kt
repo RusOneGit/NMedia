@@ -13,31 +13,24 @@ class PostViewHolder(
         binding.apply {
 
             author.text = post.author
-
             published.text = post.published
-
             content.text = post.content
             countLike.text = formatCount(post.likes)
             countShare.text = formatCount(post.shares)
 
             like.setImageResource(
-
-                if (post.likedByMe) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
-
+                if (post.likedByMe) R.drawable.ic_like_on
+                else R.drawable.ic_like_off
             )
 
             share.setImageResource(
-                if(post.sharedByMe) R.drawable.ic_baseline_share_on else R.drawable.ic_baseline_share_24
+                if (post.sharedByMe) R.drawable.ic_baseline_share_on
+                else R.drawable.ic_baseline_share_off
             )
 
-            like.setOnClickListener {
-                onLikeListener(post)
+            like.setOnClickListener { onLikeListener(post) }
 
-            }
-
-            share.setOnClickListener{
-                onShareListener(post)
-            }
+            share.setOnClickListener { onShareListener(post) }
         }
     }
 }
