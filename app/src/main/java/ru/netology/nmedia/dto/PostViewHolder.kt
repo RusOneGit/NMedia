@@ -24,8 +24,8 @@ class PostViewHolder(
             )
 
             share.setImageResource(
-                if (post.sharedByMe) R.drawable.ic_baseline_share_on
-                else R.drawable.ic_baseline_share_off
+                if (post.sharedByMe) R.drawable.ic_share_on
+                else R.drawable.ic_share_off
             )
 
             like.setOnClickListener { onLikeListener(post) }
