@@ -35,6 +35,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:paddingStart="@dimen/margin"
+            android:paddingEnd="16dp"
             android:text=""
             app:layout_constraintBottom_toTopOf="@id/toolsTop"
             app:layout_constraintEnd_toStartOf="@id/cancel"
