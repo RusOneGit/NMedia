@@ -12,6 +12,12 @@
     <string name="post_view">view</string>
     <string name="published" translatable="false">21 мая в 18:36</string>
     <string name="author" translatable="false">Нетология. Университет интернет-профессий будущег</string>
+    <string name="menu_remove">Remove</string>
+    <string name="post_text">Enter text</string>
+    <string name="error_empty_content">Content can\'t be empty</string>
+    <string name="menu_edit">Edit</string>
+    <string name="create">Create</string>
+    <string name="edit_message">Edit message</string>
 
 
 </resources>
