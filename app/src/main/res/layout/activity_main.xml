@@ -54,17 +54,12 @@
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
             android:text="@string/edit_message"
-            android:textColor="#42aaff"
+            android:textColor="#999999"
             app:layout_constraintBottom_toTopOf="@id/edited_text"
             app:layout_constraintEnd_toStartOf="@id/cancel"
             app:layout_constraintStart_toEndOf="@id/pencil"
             tools:context=".activity.MainActivity"/>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
 
         <EditText
             android:id="@+id/content"
