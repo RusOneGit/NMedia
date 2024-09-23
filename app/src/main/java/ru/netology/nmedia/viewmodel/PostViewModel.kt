@@ -1,11 +1,11 @@
 package ru.netology.nmedia.viewmodel
 
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.PostRepository
 import ru.netology.nmedia.repository.PostRepositoryInMemoryImpl
+
 private val empty = Post(
     id = 0L,
     author = "",
@@ -33,7 +33,5 @@ class PostViewModel : ViewModel() {
     fun edit(post: Post){
         edited.value = post
     }
-    fun create(post:Post){
-        edited.value = post
-    }
+
 }
