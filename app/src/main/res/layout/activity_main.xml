@@ -115,7 +115,6 @@
             android:contentDescription="@string/post_like"
             app:layout_constraintBottom_toBottomOf="@id/toolsTop"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/margin"
             app:layout_constraintStart_toEndOf="@id/content"
             app:srcCompat="@drawable/ic_baseline_clear"
             tools:context=".activity.MainActivity" />
@@ -125,7 +124,7 @@
             android:id="@+id/editGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+
             tools:context=".activity.MainActivity"
             app:constraint_referenced_ids="cancel,pencil, edited_text,edit_mode" />
 
