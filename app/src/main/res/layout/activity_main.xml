@@ -75,7 +75,8 @@
             app:layout_constraintEnd_toStartOf="@id/save"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/toolsTop"
-            tools:context=".activity.MainActivity" />
+            tools:context=".activity.MainActivity"
+            android:focusableInTouchMode="true"/>
 
         <ImageButton
             android:id="@+id/save"
