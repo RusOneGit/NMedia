@@ -15,18 +15,16 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            countLike.text = formatCount(post.likes)
-            countShare.text = formatCount(post.shares)
 
-            like.setImageResource(
-                if (post.likedByMe) R.drawable.ic_like_on
-                else R.drawable.ic_like_off
-            )
+            like.isChecked = post.likedByMe
+            like.text = formatCount(post.likes)
 
-            share.setImageResource(
-                if (post.sharedByMe) R.drawable.ic_share_on
-                else R.drawable.ic_share_off
-            )
+
+            share.isChecked = post.sharedByMe
+            share.text = formatCount(post.shares)
+
+
+            view.text = formatCount(post.view)
 
 
 
@@ -50,7 +48,9 @@ class PostViewHolder(
                                 true
                             }
 
-                            else -> false
+                            else -> {
+                                false
+                            }
                         }
                     }
                 }.show()

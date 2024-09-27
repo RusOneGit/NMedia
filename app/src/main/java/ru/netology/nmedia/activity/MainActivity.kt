@@ -58,10 +58,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.edited.observe(this) {
             if (it.id != 0L) {
                 binding.editGroup.visibility = View.VISIBLE
+                binding.content.showKeyboard()
                 binding.editedText.text = it.content
                 binding.content.setText(it.content)
-                binding.content.requestFocus()
-                binding.content.showKeyboard()
+
 
             }
         }
