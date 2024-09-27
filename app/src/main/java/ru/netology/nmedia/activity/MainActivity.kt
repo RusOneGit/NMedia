@@ -61,8 +61,6 @@ class MainActivity : AppCompatActivity() {
                 binding.content.showKeyboard()
                 binding.editedText.text = it.content
                 binding.content.setText(it.content)
-
-
             }
         }
 
