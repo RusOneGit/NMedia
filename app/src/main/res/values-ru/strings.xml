@@ -13,4 +13,7 @@
     <string name="menu_edit">Редактировать</string>
     <string name="create">Создать</string>
     <string name="edit_message">Редактирование</string>
+    <string name="chooser_share_post">Поделиться записью</string>
+    <string name="save">Сохранить</string>
+    <string name="add_post">Добавить</string>
 </resources>

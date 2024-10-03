@@ -44,7 +44,6 @@ class PostViewHolder(
 
                             R.id.edit -> {
                                 onInteractionListener.onEdit(post)
-
                                 true
                             }
 
