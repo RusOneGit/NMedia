@@ -2,7 +2,6 @@ package ru.netology.nmedia.activity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.R
@@ -20,6 +19,12 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val viewModel: PostViewModel by viewModels()
+        val postLauncher = registerForActivityResult(NewPostResultContract()) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContent(result)
+            viewModel.save()
+        }
+
 
         val adapter = PostAdapter(object : OnInteractionListener {
             override fun onLike(post: Post) {
@@ -43,11 +48,11 @@ class MainActivity : AppCompatActivity() {
 
 
             override fun onEdit(post: Post) {
-                val editIntent = Intent(this@MainActivity, NewPostActivity::class.java).apply {
-                    putExtra("EDIT_POST", post.content)
-                }
-                startActivity(editIntent)
+                viewModel.edit(post)
+                postLauncher.launch(post.content)
+                viewModel.clear()
             }
+
 
 
         })
@@ -59,14 +64,10 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
-            result ?: return@registerForActivityResult
-            viewModel.changeContent(result)
-            viewModel.save()
-        }
+
 
         binding.fab.setOnClickListener {
-            newPostLauncher.launch()
+            postLauncher.launch("")
         }
     }
 
