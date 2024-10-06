@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
                 postLauncher.launch(post.content)
-                viewModel.clear()
             }
 
            override fun onVideo(post: Post){

@@ -20,7 +20,7 @@ class PostViewHolder(
             like.isChecked = post.likedByMe
             like.text = formatCount(post.likes)
 
-            if(post.videoUrl!= ""){ video.visibility = View.VISIBLE
+            if(post.videoUrl!= null) { video.visibility = View.VISIBLE
             video.setOnClickListener{onInteractionListener.onVideo(post)}
             }
 
