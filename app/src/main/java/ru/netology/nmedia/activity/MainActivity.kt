@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val viewModel: PostViewModel by viewModels()
         val postLauncher = registerForActivityResult(NewPostResultContract()) { result ->
-            result ?: return@registerForActivityResult
-            viewModel.changeContent(result)
-            viewModel.save()
-        }
-
+            result?.let {
+                viewModel.changeContent(it)
+                viewModel.save()
+            } ?: viewModel.clear()
+}
 
         val adapter = PostAdapter(object : OnInteractionListener {
             override fun onLike(post: Post) {
