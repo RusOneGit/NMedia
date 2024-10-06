@@ -13,6 +13,7 @@ data class Post(
     val likes: Int = 0,
     val shares:Int = 0,
     val view: Int = 0,
+    val videoUrl: String = "",
     val sharedByMe: Boolean = false,
     val likedByMe: Boolean = false
 ): Parcelable

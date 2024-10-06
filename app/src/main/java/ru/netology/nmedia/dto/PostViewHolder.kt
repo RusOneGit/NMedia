@@ -1,5 +1,6 @@
 package ru.netology.nmedia.dto
 
+import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
@@ -19,6 +20,9 @@ class PostViewHolder(
             like.isChecked = post.likedByMe
             like.text = formatCount(post.likes)
 
+            if(post.videoUrl!= ""){ video.visibility = View.VISIBLE
+            video.setOnClickListener{onInteractionListener.onVideo(post)}
+            }
 
             share.isChecked = post.sharedByMe
             share.text = formatCount(post.shares)

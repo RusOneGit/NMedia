@@ -1,6 +1,7 @@
 package ru.netology.nmedia.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -53,7 +54,11 @@ class MainActivity : AppCompatActivity() {
                 viewModel.clear()
             }
 
+           override fun onVideo(post: Post){
+               val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoUrl))
+               startActivity(intent)
 
+           }
 
         })
 
@@ -63,7 +68,6 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(posts)
 
         }
-
 
 
         binding.fab.setOnClickListener {
