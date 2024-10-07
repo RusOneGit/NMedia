@@ -6,29 +6,33 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ru.netology.nmedia.dto.Post
 
-class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
+class PostRepositoryFilesImpl(private val context: Context) : PostRepository {
 
     companion object {
-        private const val KEY = "posts"
+        private const val FILE_NAME = "posts.json"
         private val gson = Gson()
     }
 
-    private val prefs = context.getSharedPreferences("repo", Context.MODE_PRIVATE)
     private val typeToken = TypeToken.getParameterized(List::class.java, Post::class.java).type
     private var nextID = 1L
     private var posts = emptyList<Post>()
-        set(value){
+        set(value) {
             field = value
             sync()
         }
     private val data = MutableLiveData(posts)
 
     init {
-        prefs.getString(KEY, null)?.let {jsonString ->
-            posts = gson.fromJson(jsonString, typeToken)
-            nextID = posts.maxOfOrNull { it.id } ?.inc() ?: 1
-            data.value = posts
+        val file = context.filesDir.resolve(FILE_NAME)
+        if (file.exists()) {
+            context.openFileInput(file.name).bufferedReader().use {
+
+                posts = gson.fromJson(it, typeToken)
+                nextID = posts.maxOfOrNull { post -> post.id }?.inc() ?: 1
+                data.value = posts
+            }
         }
+
 
     }
 
@@ -70,10 +74,9 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
         data.value = posts
     }
 
-    private fun sync(){
-        with(prefs.edit()){
-            putString(KEY, gson.toJson(posts))
-            apply()
+    private fun sync() {
+        context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE).bufferedWriter().use {
+            it.write(gson.toJson(posts))
         }
     }
 }
