@@ -10,6 +10,7 @@ interface OnInteractionListener{
     fun onShare(post: Post)
     fun onEdit(post: Post)
     fun onVideo(post: Post)
+    fun onPost(post: Post)
 }
 
 

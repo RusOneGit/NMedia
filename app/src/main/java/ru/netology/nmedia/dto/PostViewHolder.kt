@@ -1,3 +1,4 @@
+
 package ru.netology.nmedia.dto
 
 import android.view.View
@@ -29,7 +30,7 @@ class PostViewHolder(
 
             view.text = formatCount(post.view)
 
-
+            content.setOnClickListener { onInteractionListener.onPost(post) }
 
             like.setOnClickListener { onInteractionListener.onLike(post) }
 
