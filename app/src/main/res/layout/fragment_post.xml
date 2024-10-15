@@ -57,6 +57,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:checkable="true"
+        app:iconSize="36dp"
         android:contentDescription="@string/description_post_menu"
         app:icon="@drawable/ic_menu"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +73,7 @@
     <TextView
         android:id="@+id/content"
         android:layout_width="0dp"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
         android:autoLink="web"
@@ -107,7 +108,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
-        app:iconSize="48dp"
+        app:iconSize="36dp"
         style="@style/Widget.AppThem.LikeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
         android:layout_marginEnd="@dimen/distance"
-        app:iconSize="48dp"
+        app:iconSize="36dp"
         android:background="@android:color/transparent"
         android:checkable="true"
         android:contentDescription="@string/post_share"
