@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:checkable="true"
-        app:iconSize="36dp"
+       app:iconSize="24dp"
         android:contentDescription="@string/description_post_menu"
         app:icon="@drawable/ic_menu"
         app:layout_constraintEnd_toEndOf="parent"
