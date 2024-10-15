@@ -107,7 +107,7 @@
         android:background="@android:color/transparent"
         android:checkable="true"
         android:contentDescription="@string/post_like"
-        app:icon="@drawable/ic_like"
+        app:icon="@drawable/like_post_off"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrierVideo" />
 
@@ -117,28 +117,15 @@
         style="@style/Widget.AppThem.ShareButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
+        android:layout_marginEnd="@dimen/distance"
         android:background="@android:color/transparent"
         android:checkable="true"
         android:contentDescription="@string/post_share"
         app:icon="@drawable/ic_share"
-        app:layout_constraintStart_toEndOf="@id/like"
-        app:layout_constraintTop_toBottomOf="@id/barrierVideo" />
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/view"
-        style="@style/Widget.AppThem.ViewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin"
-        android:layout_marginEnd="@dimen/distance"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/post_view"
-        app:icon="@drawable/ic_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrierVideo" />
+
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierVideo"
