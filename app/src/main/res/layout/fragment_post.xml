@@ -72,6 +72,7 @@
     <TextView
         android:id="@+id/content"
         android:layout_width="0dp"
+        android:textSize="24dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
         android:autoLink="web"
@@ -106,6 +107,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
+        app:iconSize="48dp"
         style="@style/Widget.AppThem.LikeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -125,6 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
         android:layout_marginEnd="@dimen/distance"
+        app:iconSize="48dp"
         android:background="@android:color/transparent"
         android:checkable="true"
         android:contentDescription="@string/post_share"
