@@ -14,6 +14,7 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.databinding.FragmentPostBinding
+import ru.netology.nmedia.dto.OnInteractionListener
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.dto.PostViewHolder
 import ru.netology.nmedia.dto.formatCount
@@ -24,7 +25,7 @@ import kotlin.math.PI
 class PostFragment : Fragment() {
 
 
-    private val viewModel: PostViewModel by viewModels()
+    private val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
     override fun onCreateView(
         inflater: LayoutInflater,
