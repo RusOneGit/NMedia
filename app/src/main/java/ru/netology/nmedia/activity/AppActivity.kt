@@ -36,6 +36,11 @@ class AppActivity : AppCompatActivity() {
 
 
             findNavController(R.id.navHost).navigate(
+                R.id.action_postFragment_to_newPostFragment,
+                Bundle().apply { textArg = text }
+            )
+
+            findNavController(R.id.navHost).navigate(
                 R.id.action_feedFragment_to_newPostFragment,
                 Bundle().apply { textArg = text }
             )

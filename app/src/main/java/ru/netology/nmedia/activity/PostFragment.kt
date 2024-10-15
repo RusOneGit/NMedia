@@ -72,7 +72,6 @@ class PostFragment : Fragment() {
                             when (item.itemId) {
                                 R.id.remove -> {
                                     viewModel.removeByID(post.id)
-                                    findNavController().previousBackStackEntry?.savedStateHandle?.set("requestKey", true)
                                     findNavController().navigateUp()
 
                                     true
@@ -83,7 +82,6 @@ class PostFragment : Fragment() {
                                     findNavController().navigate(
                                         R.id.action_postFragment_to_newPostFragment,
                                         Bundle().apply { textArg = post.content })
-                                    findNavController().previousBackStackEntry?.savedStateHandle?.set("requestKey", true)
                                     true
                                 }
 
