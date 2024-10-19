@@ -4,7 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import ru.netology.nmedia.databinding.CardPostBinding
-interface OnInteractionListener{
+
+interface OnInteractionListener {
     fun onLike(post: Post)
     fun onRemove(post: Post)
     fun onShare(post: Post)
@@ -12,7 +13,6 @@ interface OnInteractionListener{
     fun onVideo(post: Post)
     fun onPost(post: Post)
 }
-
 
 class PostAdapter(
     private val onInteractionListener: OnInteractionListener,
