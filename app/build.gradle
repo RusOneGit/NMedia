@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
+    id 'org.jetbrains.kotlin.kapt'
+
 }
 
 android {
@@ -51,7 +53,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation libs.androidx.navigation.fragment.ktx
     implementation libs.androidx.navigation.ui.ktx
+    implementation "androidx.room:room-runtime:2.6.1"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    kapt "androidx.room:room-compiler:2.6.1"
 }
