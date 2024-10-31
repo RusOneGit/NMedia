@@ -39,14 +39,51 @@ class FCMService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
 
         message.data[action]?.let {
-            when (Action.valueOf(it)) {
-                Action.LIKE -> handleLike(gson.fromJson(message.data[content], Like::class.java))
+            try {
+                when (Action.valueOf(it)) {
+                    Action.LIKE -> handleLike(
+                        gson.fromJson(
+                            message.data[content],
+                            Like::class.java
+                        )
+                    )
+
+                    Action.CREATE -> addPost(
+                        gson.fromJson(
+                            message.data[content],
+                            Create::class.java
+                        )
+                    )
+                }
+            } catch (e: IllegalArgumentException) {
+                showUnknownActionNotification()
             }
         }
     }
 
     override fun onNewToken(token: String) {
         println(token)
+    }
+
+
+    private fun addPost(content: Create) {
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(
+                getString(
+                    R.string.notification_user_add_post,
+                    content.userName,
+                    content.postContent
+                )
+            )
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText(content.postContent)
+            )
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+
+        notify(notification)
     }
 
     private fun handleLike(content: Like) {
@@ -76,10 +113,20 @@ class FCMService : FirebaseMessagingService() {
                 .notify(Random.nextInt(100_000), notification)
         }
     }
+    private fun showUnknownActionNotification() {
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle("Неизвестный тип уведомлений")
+            .setContentText("Получено сообщение с неизвестным типом действия.")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+
+        notify(notification)
+    }
 }
 
 enum class Action {
-    LIKE,
+    LIKE, CREATE
 }
 
 data class Like(
@@ -88,3 +135,9 @@ data class Like(
     val postId: Long,
     val postAuthor: String,
 )
+data class Create(
+    val userName: String,
+    val postContent: String
+)
+
+
