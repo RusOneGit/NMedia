@@ -2,11 +2,13 @@ package ru.netology.nmedia.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.model.FeedState
 import ru.netology.nmedia.repository.PostRepository
-import ru.netology.nmedia.repository.PostRepositoryRoomImpl
+import ru.netology.nmedia.repository.PostRepositoryImpl
+import kotlin.concurrent.thread
 
 private val empty = Post(
     id = 0L,
@@ -18,10 +20,9 @@ private val empty = Post(
     sharedByMe = false
 )
 class PostViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: PostRepository = PostRepositoryRoomImpl(
-        AppDb.getInstance(application).postDao
-    )
-    val data = repository.getAll()
+    private val repository: PostRepository = PostRepositoryImpl()
+    private val _data = MutableLiveData(FeedState())
+    val data: LiveData<FeedState> = _data
     val edited = MutableLiveData(empty)
     fun applyChangesAndSave(newText: String) {
         edited.value?.let {
@@ -35,6 +36,24 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun likeByID(id: Long) = repository.likeByID(id)
     fun shareByID(id: Long) = repository.shareByID(id)
     fun removeByID(id: Long) = repository.removeByID(id)
+
+    init {
+        load()
+    }
+
+    fun load() {
+        thread {
+            _data.postValue(FeedState(loading = true))
+        }
+        try {
+            val posts = repository.getAll()
+            FeedState(posts = posts, empty = posts.isEmpty())
+        } catch (e: Exception) {
+            FeedState(error = true)
+        }
+            .let(_data::postValue)
+    }
+
     fun edit(post: Post){
         edited.value = post
     }
