@@ -84,6 +84,9 @@ class FeedFragment : Fragment() {
             binding.progress.isVisible = state.loading
 
         }
+        binding.retry.setOnClickListener{
+            viewModel.load()
+        }
 
 
 

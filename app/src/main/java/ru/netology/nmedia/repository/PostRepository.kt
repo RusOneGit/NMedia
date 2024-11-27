@@ -6,5 +6,5 @@ interface PostRepository {
     fun likeByID(id: Long)
     fun shareByID(id: Long)
     fun removeByID(id: Long)
-    fun save(post: Post): Post
+    fun save(post: Post)
 }

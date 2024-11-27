@@ -33,7 +33,7 @@ class PostFragment : Fragment() {
     ): View {
         val binding = FragmentPostBinding.inflate(inflater, container, false)
         val postId = arguments?.getLong("postId") ?: return binding.root
-        viewModel.data.observe(viewLifecycleOwner) { posts ->
+        viewModel.data.observe(viewLifecycleOwner) { state -> val posts = state.posts
             val post = posts.find { it.id == postId } ?: return@observe
 
             binding.apply {

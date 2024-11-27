@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.FragmentNewPostBinding
+import ru.netology.nmedia.util.AndroidUtils
 import ru.netology.nmedia.util.StringArg
 import ru.netology.nmedia.viewmodel.PostViewModel
 
@@ -34,12 +35,18 @@ class NewPostFragment : Fragment() {
             if (text.isNotBlank()) {
                 viewModel.changeContent(text)
                 viewModel.save()
+
             }
-            findNavController().navigateUp()
         }
+
 
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
             viewModel.clear()
+            findNavController().navigateUp()
+        }
+
+        viewModel.postCreated.observe(viewLifecycleOwner){
+            viewModel.load()
             findNavController().navigateUp()
         }
 
@@ -47,3 +54,4 @@ class NewPostFragment : Fragment() {
     }
 
 }
+
