@@ -27,8 +27,8 @@
     <string name="channel_remote_description">Notifications from remote server</string>
     <string name="notification_user_add_post">User %1$s add post: %2$s</string>
     <string name="something_went_wrong">Error loading..</string>
-    <string name="retry">Обновить</string>
-    <string name="there_is_no_posts">Постов нет</string>
+    <string name="retry">Refresh</string>
+    <string name="there_is_no_posts">Empty</string>
 
 
 </resources>

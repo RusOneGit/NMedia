@@ -35,8 +35,21 @@ class PostRepositoryImpl: PostRepository {
             }
     }
 
+
+
+
     override fun likeByID(id: Long) {
-        // TODO: do this in homework
+
+        val request: Request = Request.Builder()
+            .method("POST", "{}".toRequestBody(jsonType))
+            .url("${BASE_URL}/api/slow/posts/$id/likes")
+            .build()
+
+        client.newCall(request)
+            .execute()
+            .close()
+
+
     }
 
     override fun shareByID(id: Long) {

@@ -21,4 +21,7 @@
     <string name="channel_remote_name">Уведомление с сервера</string>
     <string name="channel_remote_description">Уведомление с удаленного сервера</string>
     <string name="notification_user_add_post">Пользователь %1$s добавил пост: %2$s</string>
+    <string name="something_went_wrong">Ошибка загрузки</string>
+    <string name="retry">Обновить</string>
+    <string name="there_is_no_posts">Постов нет</string>
 </resources>

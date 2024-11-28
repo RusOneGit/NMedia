@@ -56,9 +56,44 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }
         edited.value = empty
     }
-    fun likeByID(id: Long) = repository.likeByID(id)
+    fun likeByID(id: Long) {
+        val currentState = _data.value ?: return
+        val posts = currentState.posts
+
+        val post = posts.find { it.id == id } ?: return
+        val likedByMe = post.likedByMe
+
+        thread {
+            try {
+                if (likedByMe) {
+                    repository.likeByID(id)
+                    _data.postValue(currentState.copy(posts = currentState.posts.map {
+                        if (it.id == id) it.copy(likedByMe = false, likes = it.likes - 1) else it
+                    }))
+                } else {
+                    repository.likeByID(id)
+                    _data.postValue(currentState.copy(posts = currentState.posts.map {
+                        if (it.id == id) it.copy(likedByMe = true, likes = it.likes + 1) else it
+                    }))
+                }
+            } catch (e: Exception) {
+                _data.postValue(currentState)
+            }
+        }
+    }
     fun shareByID(id: Long) = repository.shareByID(id)
-    fun removeByID(id: Long) = repository.removeByID(id)
+    fun removeByID(id: Long) {
+        val currentState = _data.value ?: return
+        thread {
+            _data.postValue(currentState.copy(posts = currentState.posts.filter { it.id != id }))
+            try {
+                repository.removeByID(id)
+            } catch (e: Exception) {
+                _data.postValue(currentState)
+
+            }
+        }
+    }
 
 
 
