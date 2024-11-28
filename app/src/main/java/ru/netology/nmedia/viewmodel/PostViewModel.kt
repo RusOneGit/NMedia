@@ -71,7 +71,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
 
                 _data.postValue(currentState.copy(posts = currentState.posts.map {
-                        if (it.id == id) it.copy(likedByMe = !it.likedByMe) else it
+                        if (it.id == id) newPost else it
                     }))
             } catch (e: Exception) {
 
@@ -81,6 +81,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     }
     fun shareByID(id: Long) = repository.shareByID(id)
+
+
     fun removeByID(id: Long) {
         val currentState = _data.value ?: return
         thread {

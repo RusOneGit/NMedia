@@ -48,7 +48,7 @@ class PostRepositoryImpl: PostRepository {
             .execute()
             .let { it.body?.string() ?: throw RuntimeException("body is null")
             }
-            .let { gson.fromJson(it, typeToken.type) }
+            .let { gson.fromJson(it, Post::class.java) }
 
 
     }
