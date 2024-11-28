@@ -66,10 +66,11 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
         thread {
             try {
-                repository.likeByID(id, likedByMe)
+                val newPost = repository.likeByID(id, likedByMe)
 
 
-                    _data.postValue(currentState.copy(posts = currentState.posts.map {
+
+                _data.postValue(currentState.copy(posts = currentState.posts.map {
                         if (it.id == id) it.copy(likedByMe = !it.likedByMe) else it
                     }))
             } catch (e: Exception) {
