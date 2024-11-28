@@ -35,14 +35,14 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun load() {
         thread {
             _data.postValue(FeedState(loading = true))
+            try {
+                val posts = repository.getAll()
+                FeedState(posts = posts, empty = posts.isEmpty())
+            } catch (e: Exception) {
+                FeedState(error = true)
+            }
+                .let(_data::postValue)
         }
-        try {
-            val posts = repository.getAll()
-            FeedState(posts = posts, empty = posts.isEmpty())
-        } catch (e: Exception) {
-            FeedState(error = true)
-        }
-            .let(_data::postValue)
     }
 
     val edited = MutableLiveData(empty)
