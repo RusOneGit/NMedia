@@ -60,26 +60,24 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         val currentState = _data.value ?: return
         val posts = currentState.posts
 
+
         val post = posts.find { it.id == id } ?: return
         val likedByMe = post.likedByMe
 
         thread {
             try {
-                if (likedByMe) {
-                    repository.likeByID(id)
+                repository.likeByID(id, likedByMe)
+
+
                     _data.postValue(currentState.copy(posts = currentState.posts.map {
-                        if (it.id == id) it.copy(likedByMe = false, likes = it.likes - 1) else it
+                        if (it.id == id) it.copy(likedByMe = !it.likedByMe) else it
                     }))
-                } else {
-                    repository.likeByID(id)
-                    _data.postValue(currentState.copy(posts = currentState.posts.map {
-                        if (it.id == id) it.copy(likedByMe = true, likes = it.likes + 1) else it
-                    }))
-                }
             } catch (e: Exception) {
+
                 _data.postValue(currentState)
             }
         }
+
     }
     fun shareByID(id: Long) = repository.shareByID(id)
     fun removeByID(id: Long) {
