@@ -62,11 +62,12 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
                 val updatedPosts = posts.map {
                     if (it.id == result.id) result else it
                 }
-                _data.value = currentState.copy(posts = updatedPosts)
+                _data.postValue(currentState.copy(posts = updatedPosts))
             }
 
 
             override fun onError(error: Throwable) {
+                _data.value
             }
 
         })
