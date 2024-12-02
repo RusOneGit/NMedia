@@ -119,6 +119,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
                 }
 
                 override fun onError(e: Throwable) {
+                    _data.value
 
                 }
             })
