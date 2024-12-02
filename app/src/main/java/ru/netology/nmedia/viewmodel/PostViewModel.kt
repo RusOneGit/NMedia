@@ -59,10 +59,11 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
         repository.likeByID(id, likedByMe, object : PostRepository.PostCallback<Post> {
             override fun onSuccess(result: Post) {
-                val updatedPosts = posts.map {
+                val refreshState = _data.value ?: return
+                val updatedPosts = refreshState.posts.map {
                     if (it.id == result.id) result else it
                 }
-                _data.postValue(currentState.copy(posts = updatedPosts))
+                _data.postValue(refreshState.copy(posts = updatedPosts))
             }
 
 
@@ -77,8 +78,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     fun removeByID(id: Long) {
         val currentState = _data.value ?: return
-
-            _data.postValue(currentState.copy(posts = currentState.posts.filter { it.id != id }))
+        _data.postValue(currentState.copy(posts = currentState.posts.filter { it.id != id }))
 
         repository.removeByID(id, object : PostRepository.PostCallback<Unit> {
             override fun onSuccess(result: Unit) {
