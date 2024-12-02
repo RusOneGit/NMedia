@@ -9,7 +9,6 @@ import ru.netology.nmedia.model.FeedState
 import ru.netology.nmedia.repository.PostRepository
 import ru.netology.nmedia.repository.PostRepositoryImpl
 import ru.netology.nmedia.util.SingleLiveEvent
-import kotlin.concurrent.thread
 
 private val empty = Post(
     id = 0L,
@@ -33,29 +32,23 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun load() {
-        thread {
             _data.postValue(FeedState(loading = true))
-            try {
-                val posts = repository.getAll()
-                FeedState(posts = posts, empty = posts.isEmpty())
-            } catch (e: Exception) {
-                FeedState(error = true)
-            }
-                .let(_data::postValue)
-        }
+
+        repository.getAllAsync(
+            object : PostRepository.PostCallback<List<Post>> {
+                override fun onSuccess(result: List<Post>) {
+                    _data.postValue(FeedState(posts = result, empty = result.isEmpty()))
+                }
+
+                override fun onError(error: Throwable) {
+                    _data.postValue(FeedState(error = true))
+                }
+
+            })
     }
 
     val edited = MutableLiveData(empty)
 
-    fun applyChangesAndSave(newText: String) {
-        edited.value?.let {
-            val text = newText.trim()
-            if(text!= it.content){
-                repository.save(it.copy(content = text))
-            }
-        }
-        edited.value = empty
-    }
     fun likeByID(id: Long) {
         val currentState = _data.value ?: return
         val posts = currentState.posts
@@ -64,36 +57,39 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         val post = posts.find { it.id == id } ?: return
         val likedByMe = post.likedByMe
 
-        thread {
-            try {
-                val newPost = repository.likeByID(id, likedByMe)
-
-
-
-                _data.postValue(currentState.copy(posts = currentState.posts.map {
-                        if (it.id == id) newPost else it
-                    }))
-            } catch (e: Exception) {
-
-                _data.postValue(currentState)
+        repository.likeByID(id, likedByMe, object : PostRepository.PostCallback<Post> {
+            override fun onSuccess(result: Post) {
+                val updatedPosts = posts.map {
+                    if (it.id == result.id) result else it
+                }
+                _data.value = currentState.copy(posts = updatedPosts)
             }
-        }
 
+
+            override fun onError(error: Throwable) {
+            }
+
+        })
     }
     fun shareByID(id: Long) = repository.shareByID(id)
 
 
     fun removeByID(id: Long) {
         val currentState = _data.value ?: return
-        thread {
+
             _data.postValue(currentState.copy(posts = currentState.posts.filter { it.id != id }))
-            try {
-                repository.removeByID(id)
-            } catch (e: Exception) {
-                _data.postValue(currentState)
+
+        repository.removeByID(id, object : PostRepository.PostCallback<Unit> {
+            override fun onSuccess(result: Unit) {
 
             }
-        }
+
+            override fun onError(error: Throwable) {
+                _data.postValue(currentState)
+            }
+
+        })
+
     }
 
 
@@ -112,12 +108,19 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         edited.value = edited.value?.copy(content = text)
     }
 
+
     fun save() {
         edited.value?.let {
-            thread {
-                repository.save(it)
-                _postCreated.postValue(Unit)
-            }
+            repository.save(it, object : PostRepository.PostCallback<Post> {
+                override fun onSuccess(result: Post) {
+
+                    _postCreated.postValue(Unit)
+                }
+
+                override fun onError(e: Throwable) {
+
+                }
+            })
         }
         edited.value = empty
     }

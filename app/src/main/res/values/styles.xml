@@ -5,6 +5,18 @@
         <item name="buttonTint">@color/like_checkbox_tint</item>
     </style>
 
+
+
+    <style name="fab_ok">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="fab_add">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
     <style name="Widget.AppThem.ShareCheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
         <item name="buttonTint">@color/share_checkbox_tint</item>
     </style>
