@@ -13,6 +13,7 @@ data class Post(
     val sharedByMe: Boolean = false,
     val shares: Int = 0,
     val view: Int = 0,
+    val authorAvatar: String = "",
     val videoUrl: String? = null
 
 

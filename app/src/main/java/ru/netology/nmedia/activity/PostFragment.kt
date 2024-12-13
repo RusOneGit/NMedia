@@ -10,6 +10,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import ru.netology.nmedia.R
 import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.databinding.CardPostBinding
@@ -37,6 +38,16 @@ class PostFragment : Fragment() {
             val post = posts.find { it.id == postId } ?: return@observe
 
             binding.apply {
+
+
+                val url = "http://10.0.2.2:9999/avatars/${post.authorAvatar}"
+                Glide.with(binding.avatar)
+                    .load(url)
+                    .placeholder(R.drawable.ic_not_image)
+                    .error(R.drawable.ic_error)
+                    .timeout(10_000)
+                    .into(binding.avatar)
+
                 author.text = post.author
                 published.text = post.published
                 content.text = post.content
