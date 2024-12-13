@@ -58,6 +58,15 @@ class PostFragment : Fragment() {
                 when (post.attachment?.type) {
                     VIDEO -> {
                         attachment.visibility = View.VISIBLE
+
+//                    val url = "http://10.0.2.2:9999/images/${"play.jpg"}"
+//                    Glide.with(binding.attachment)
+//                        .load(url)
+//                        .placeholder(R.drawable.ic_not_image)
+//                        .error(R.drawable.ic_error)
+//                        .timeout(10_000)
+//                        .into(binding.attachment)
+
                         attachment.setOnClickListener {
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.attachment.url))
                             startActivity(intent)
