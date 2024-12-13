@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import ru.netology.nmedia.R
 import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.databinding.CardPostBinding
@@ -46,6 +47,7 @@ class PostFragment : Fragment() {
                     .placeholder(R.drawable.ic_not_image)
                     .error(R.drawable.ic_error)
                     .timeout(10_000)
+                    .apply(RequestOptions.circleCropTransform())
                     .into(binding.avatar)
 
                 author.text = post.author

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 
@@ -22,6 +23,7 @@ class PostViewHolder(
                 .placeholder(R.drawable.ic_not_image)
                 .error(R.drawable.ic_error)
                 .timeout(10_000)
+                .apply(RequestOptions.circleCropTransform())
                 .into(binding.avatar)
 
 
