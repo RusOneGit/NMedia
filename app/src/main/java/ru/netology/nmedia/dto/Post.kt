@@ -1,5 +1,6 @@
 package ru.netology.nmedia.dto
 
+import ru.netology.nmedia.enumeration.AttachmentType
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -14,10 +15,18 @@ data class Post(
     val shares: Int = 0,
     val view: Int = 0,
     val authorAvatar: String = "",
-    val videoUrl: String? = null
+    val attachment: Attachment? = null
 
 
 )
+
+
+data class Attachment(
+    val url: String,
+    val description: String?,
+    val type: AttachmentType
+)
+
 
 fun formatCount(count: Int): String {
     val df = DecimalFormat("#.#").apply {

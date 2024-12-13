@@ -78,18 +78,17 @@
         android:layout_marginTop="@dimen/margin"
         android:autoLink="web"
         android:text=""
-        app:layout_constraintBottom_toTopOf="@id/video"
+        app:layout_constraintBottom_toTopOf="@id/attachment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrierHeader" />
 
     <ImageButton
-        android:id="@+id/video"
+        android:id="@+id/attachment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:autoLink="web"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_play_video"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/barrier4"
@@ -142,7 +141,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="video" />
+        app:constraint_referenced_ids="attachment" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierContent"

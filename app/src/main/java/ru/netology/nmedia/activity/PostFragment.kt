@@ -14,14 +14,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import ru.netology.nmedia.R
 import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
-import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.databinding.FragmentPostBinding
-import ru.netology.nmedia.dto.OnInteractionListener
-import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.dto.PostViewHolder
 import ru.netology.nmedia.dto.formatCount
+import ru.netology.nmedia.enumeration.AttachmentType.*
 import ru.netology.nmedia.viewmodel.PostViewModel
-import kotlin.math.PI
 
 class PostFragment : Fragment() {
 
@@ -50,6 +46,8 @@ class PostFragment : Fragment() {
                     .apply(RequestOptions.circleCropTransform())
                     .into(binding.avatar)
 
+
+
                 author.text = post.author
                 published.text = post.published
                 content.text = post.content
@@ -57,9 +55,29 @@ class PostFragment : Fragment() {
                 like.isChecked = post.likedByMe
                 like.text = formatCount(post.likes)
 
-                video.visibility = if(!post.videoUrl.isNullOrBlank())  View.VISIBLE else View.GONE
-                video.setOnClickListener{val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoUrl))
-                    startActivity(intent)}
+                when (post.attachment?.type) {
+                    VIDEO -> {
+                        attachment.visibility = View.VISIBLE
+                        attachment.setOnClickListener {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.attachment.url))
+                            startActivity(intent)
+                        }
+                    }
+
+                    IMAGE -> {
+                        attachment.visibility = View.VISIBLE
+                        val url = "http://10.0.2.2:9999/images/${post.attachment.url}"
+                        Glide.with(binding.attachment).load(url)
+                            .placeholder(R.drawable.ic_not_image)
+                            .error(R.drawable.ic_error)
+                            .timeout(10_000)
+                            .into(binding.attachment)
+                    }
+
+                    null -> attachment.visibility = View.GONE
+                }
+
+
 
                 share.isChecked = post.sharedByMe
                 share.text = formatCount(post.shares)
