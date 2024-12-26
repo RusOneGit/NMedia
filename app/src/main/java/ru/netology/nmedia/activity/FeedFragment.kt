@@ -67,7 +67,7 @@ class FeedFragment : Fragment() {
             }
 
             override fun onVideo(post: Post) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoUrl))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.attachment?.url))
                 startActivity(intent)
 
             }
