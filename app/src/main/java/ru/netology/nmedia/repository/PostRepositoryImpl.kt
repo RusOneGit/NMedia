@@ -1,58 +1,52 @@
 package ru.netology.nmedia.repository
 
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import okhttp3.Call
-import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.Response
+import retrofit2.Callback
+import retrofit2.Response
+import ru.netology.nmedia.api.PostApi
 import ru.netology.nmedia.dto.Post
 import java.io.IOException
-import java.util.concurrent.TimeUnit
 
 
 class PostRepositoryImpl: PostRepository {
-    private val client = OkHttpClient.Builder()
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .build()
-    private val gson = Gson()
-    private val typeToken = object : TypeToken<List<Post>>() {}
 
-    companion object {
-        private const val BASE_URL = "http://10.0.2.2:9999"
-        private val jsonType = "application/json".toMediaType()
+    override fun getAll(): List<Post> {
+        return PostApi.service.getAll()
+            .execute()
+            .let {
+                if (it.isSuccessful) {
+                    it.body() ?: throw RuntimeException("body is null")
+                } else {
+                    throw RuntimeException(it.message())
+                }
+
+                }
+
     }
 
-
-    override fun getAllAsync(callback: PostRepository.PostCallback<List<Post>>) {
-        val request: Request = Request.Builder()
-            .url("${BASE_URL}/api/slow/posts")
-            .build()
-
-        client.newCall(request)
-            .enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    callback.onError(e)
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    val body = response.body
-                    if (body == null) {
-                        callback.onError(RuntimeException("body is null"))
+    override fun getAllAsync(callback: PostRepository.GetAllCalback) {
+        PostApi.service.getAll()
+            .enqueue(object : Callback<List<Post>> {
+                override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
+                    if(!response.isSuccessful) {
+                        callback.onError(RuntimeException(response.message()))
                         return
                     }
-                    try {
-                        callback.onSuccess(gson.fromJson<List<Post>>(body.string(), typeToken.type))
-                    } catch (e: Exception) {
-                        callback.onError(e)
-                    }
+                    val body = response.body() :? throw RuntimeException("body is null")
 
+
+                    override fun onFailure(call: Call, e: IOException) {
+                        callback.onSucces(body)
+                    }
 
                 }
 
+                override fun onFailure(call: Call<List<Post>>, e: Throwable) {
+                   callback.onError(e)
+                }
             })
     }
 
