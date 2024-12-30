@@ -17,7 +17,7 @@ import ru.netology.nmedia.BuildConfig
 import ru.netology.nmedia.dto.Post
 import java.util.concurrent.TimeUnit
 
-private const val BASE_URL = "http://10.0.2.2:9999/api/slow/"
+private const val BASE_URL = "${BuildConfig.BASE_URL}api/slow/"
 
 private val client = OkHttpClient.Builder()
     .connectTimeout(30, TimeUnit.SECONDS)
