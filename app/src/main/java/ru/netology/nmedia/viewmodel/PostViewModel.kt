@@ -37,11 +37,11 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         repository.getAllAsync(
             object : PostRepository.PostCallback<List<Post>> {
                 override fun onSuccess(result: List<Post>) {
-                    _data.postValue(FeedState(posts = result, empty = result.isEmpty()))
+                    _data.value = (FeedState(posts = result, empty = result.isEmpty()))
                 }
 
                 override fun onError(error: Throwable) {
-                    _data.postValue(FeedState(error = true))
+                    _data.value = (FeedState(error = true))
                 }
 
             })

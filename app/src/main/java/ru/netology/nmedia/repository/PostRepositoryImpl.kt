@@ -1,14 +1,10 @@
 package ru.netology.nmedia.repository
 
-import okhttp3.Call
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.netology.nmedia.api.PostApi
 import ru.netology.nmedia.dto.Post
-import java.io.IOException
 
 
 class PostRepositoryImpl: PostRepository {
@@ -27,28 +23,28 @@ class PostRepositoryImpl: PostRepository {
 
     }
 
-    override fun getAllAsync(callback: PostRepository.GetAllCalback) {
-        PostApi.service.getAll()
-            .enqueue(object : Callback<List<Post>> {
-                override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
-                    if(!response.isSuccessful) {
-                        callback.onError(RuntimeException(response.message()))
-                        return
-                    }
-                    val body = response.body() :? throw RuntimeException("body is null")
-
-
-                    override fun onFailure(call: Call, e: IOException) {
-                        callback.onSucces(body)
-                    }
-
+    override fun getAllAsync(callback: PostRepository.PostCallback<List<Post>>) {
+        PostApi.service.getAll().enqueue(object : Callback<List<Post>> {
+            override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
+                if (!response.isSuccessful) {
+                    callback.onError(RuntimeException(response.message()))
+                    return
                 }
 
-                override fun onFailure(call: Call<List<Post>>, e: Throwable) {
-                   callback.onError(e)
+                val body = response.body()
+                if (body == null) {
+                    callback.onError(RuntimeException("body is null"))
+                } else {
+                    callback.onSuccess(body)
                 }
-            })
+            }
+
+            override fun onFailure(call: Call<List<Post>>, e: Throwable) {
+                callback.onError(e)
+            }
+        })
     }
+
 
 
     override fun likeByID(
@@ -56,7 +52,7 @@ class PostRepositoryImpl: PostRepository {
         likedByMe: Boolean,
         callback: PostRepository.PostCallback<Post>
     ) {
-
+        PostApi.service.likeByID(id)
     }
 
     override fun shareByID(id: Long) {
